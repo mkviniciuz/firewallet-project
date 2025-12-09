@@ -7,6 +7,7 @@ function createWindow() {
     height: 852,
     frame: false,
     resizable: false,
+    icon: path.join(__dirname, 'assets/app-icon.png'),
     webPreferences: {
       preload: path.join(__dirname, "preload.js")
     }
