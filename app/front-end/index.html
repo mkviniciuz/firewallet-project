@@ -7,14 +7,17 @@
   </head>
   <body>
     <div id="main-content">
-      <img src="login-logo.png" draggable="false" style="user-select: none; margin-bottom: -100px;">
+      <img src="assets/img/login-logo.png" draggable="false" style="user-select: none; margin-bottom: -100px;">
       <main>
         <p style="font-weight: 200; font-size: 12px;">Entre em sua conta <b style="font-weight: 800;">Firewallet©</b></bold></p>
-         <input id="cpf" type="text" maxlength="14" placeholder="CPF">
-         <input id="password" type="password" maxlength="14" placeholder="Senha">
-         <a><p style="font-weight: 200; font-size: 12px; margin-right: 80px;">Recuperar meu acesso ></p></a>
+        <form id="login-form" onsubmit="event.preventDefault(); enviarLogin();" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <input id="cpf" type="text" maxlength="14" placeholder="CPF">
+          <input id="password" type="password" maxlength="6" placeholder="Senha">
+          <a><p style="font-weight: 200; font-size: 12px; margin-right: 80px;">Recuperar meu acesso ></p></a>
+          <button id="login-button" type="submit">ENTRAR</button>
+        </form>
       </main>
-      <button id="login-button">ENTRAR</button>
+      
       <footer>
         <h3 style="font-size: 10px; margin-bottom: 0px;">Firewallet©</h3>
         <p style="font-size: 10px; font-weight: 400; opacity: 0.3;margin-bottom: -15px;">Desenvolvido por V²</p>
@@ -45,5 +48,23 @@
 
     cpfInput.value = v;
   });
+</script>
+<script>
+  async function enviarLogin() {
+    const cpf = document.getElementById("cpf").value.replace(/\D/g, "");
+    const senha = document.getElementById("password").value;
+
+    const resposta = await window.api.login(cpf, senha);
+
+    console.log(resposta);
+
+    if (resposta.ok) {
+      window.api.navegar("dashboard.html");
+      document.getElementById("login-form").reset();
+
+    } else {
+        alert("Erro: " + resposta.msg);
+    }
+}
 </script>
 </html>
