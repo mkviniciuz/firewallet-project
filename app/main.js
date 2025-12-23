@@ -43,11 +43,16 @@ app.whenReady().then(() => {
         });
     });
 
-    ipcMain.on("carregar-pagina", (event, pagina) => {
-    const win = BrowserWindow.getFocusedWindow();
-    win.loadFile(`front-end/${pagina}`);
-});
+    ipcMain.handle("get-saldo-python", async (event, {cpf}) => {
+        return new Promise((resolve) => {
+            pyProc.stdin.write(JSON.stringify({ type: "saldo", cpf}) + "\n");
 
+            pyProc.stdout.once("data", (data) => {
+                const balance = JSON.parse(data.toString());
+                resolve(balance);
+            });
+        });
+    });
 
   createWindow();
 

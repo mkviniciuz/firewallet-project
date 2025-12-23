@@ -21,6 +21,20 @@ def login_verify(cpf, password):
         return {"ok": True, "msg": "Login efetuado"}
     else:
         return {"ok": False, "msg": "Senha incorreta", "pass": password, "passh":password_hash}
+    
+
+def current_balance(cpf):
+    conn = sqlite3.connect("../data/auth.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT current_balance from users WHERE cpf = ?", (cpf,))
+    resultado = cursor.fetchone()
+
+    if resultado:
+        return {"ok": True, "msg": "Saldo localizado!", "saldo": resultado[0]}
+    else:
+        return {"ok": False, "msg": "Usuário não encontrado.", "saldo": 0}
+
 
 for line in sys.stdin:
     try:
@@ -28,6 +42,11 @@ for line in sys.stdin:
         if data["type"] == "login":
             resultado = login_verify(data["cpf"], data["senha"])
             sys.stdout.write(json.dumps(resultado) + "\n")
+            sys.stdout.flush()
+
+        if data["type"] == "saldo":
+            balance = current_balance(data["cpf"])
+            sys.stdout.write(json.dumps(balance) + "\n")
             sys.stdout.flush()
 
     except Exception as e:

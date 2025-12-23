@@ -24,6 +24,20 @@
       </footer>
     </div>
 
+    <div id="panel-dashboard" style="display: none;">
+      <img src="assets/img/app-icon.png" draggable="false"  style="user-select: none; margin: 15px; position: absolute;left: 0px;" width="40px">
+      <span id="balance-section">
+        <p style="font-weight: 200; font-size: 12px;">Saldo atual</p>
+        <h2 id="balance-value">5.023</h2>
+        <span id="balance-type">
+          <p id="corrente-type">Corrente</p>
+          <p id="poupanca-type">Poupança</p>
+        </span>
+
+      </span>
+
+    </div>
+
   </body>
   <script>
   const cpfInput = document.getElementById("cpf");
@@ -55,16 +69,35 @@
     const senha = document.getElementById("password").value;
 
     const resposta = await window.api.login(cpf, senha);
+    const balance = await window.api.buscarSaldo(cpf)
 
     console.log(resposta);
+    console.log(balance);
 
     if (resposta.ok) {
-      window.api.navegar("dashboard.html");
-      document.getElementById("login-form").reset();
-
+      document.getElementById("main-content").style.display = 'none';
+      document.getElementById("panel-dashboard").style.display = 'flex';
+      document.getElementById("balance-value").innerText = balance.saldo;
     } else {
         alert("Erro: " + resposta.msg);
     }
 }
+</script>
+<script>
+    async function carregarSaldo() {
+      const cpf = document.getElementById("cpf").value.replace(/\D/g, "");
+
+      const resposta = await window.api.buscarSaldo(cpf);
+
+      console.log(resposta);
+
+      if (resposta.ok) {
+        document.getElementById("balance-value").innerText = resposta.saldo;
+
+      } else {
+          alert("Erro: " + resposta.msg);
+      }
+
+  };
 </script>
 </html>
