@@ -293,3 +293,28 @@ input[type="date"]:focus, input[type="date"]:valid {
             color: rgba(255, 255, 255, 0.3);
             line-height: 1.5;
         }
+
+
+
+.animation-panel {
+    animation: panel-loaded 2s ease-in;
+}
+
+
+@keyframes panel-loaded {
+    0% {
+        display: flex;
+        opacity: 0;
+    }
+
+    25% {
+        
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    
+}
