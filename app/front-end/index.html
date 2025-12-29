@@ -50,7 +50,7 @@
       <main>
         <p style="font-weight: 200; font-size: 12px;">Entre em sua conta <b style="font-weight: 800;">Firewallet©</b></bold></p>
         <form id="login-form" onsubmit="event.preventDefault(); enviarLogin();" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-          <input id="cpf" type="text" maxlength="14" placeholder="CPF">
+          <input id="cpf" type="text" maxlength="14" placeholder="CPF" autofocus>
           <input id="password" type="password" maxlength="6" placeholder="Senha">
           <a><p style="font-weight: 200; font-size: 12px; margin-right: 80px;" onclick="createaccount()">Criar uma conta Firewallet ></p></a>
           <button id="login-button" type="submit">ENTRAR</button>
@@ -116,6 +116,7 @@
     if (resposta.ok) {
       document.getElementById("main-content").style.display = 'none';
       document.getElementById("panel-dashboard").style.display = 'flex';
+      document.getElementById("panel-dashboard").classList.add('animation-panel')
       document.getElementById("balance-value").innerText = balance.saldo;
     } else {
         alert("Erro: " + resposta.msg);

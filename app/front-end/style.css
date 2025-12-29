@@ -117,7 +117,7 @@ main {
 
 #panel-dashboard {
     background: #0D0D0D;
-    height: 852px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: baseline;
