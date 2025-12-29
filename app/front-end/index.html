@@ -6,6 +6,45 @@
     <title>Firewallet</title>
   </head>
   <body>
+    <div id="register-panel" style="display: none;">
+      <img src="assets/img/login-logo.png" draggable="false" style="user-select: none; margin-bottom: -50px;">
+      <h2 id="register-title">Crie sua conta <strong>Firewallet©</strong></h2>
+      <form action="#" method="POST">
+            <div class="input-group">
+                <input type="text" name="nome" placeholder="Nome completo" required>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="cpf-register" name="cpf" placeholder="CPF" maxlength="14" required>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="nascimento" placeholder="Data de nascimento" onfocus="(this.type='date')" onblur="(if(!this.value)this.type='text')" required>
+            </div>
+
+            <div class="input-group">
+                <input type="email" name="email" placeholder="E-mail" required>
+            </div>
+
+            <div class="input-group">
+                <input type="tel" id="celular" name="celular" placeholder="Celular" maxlength="15" required>
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="senha" placeholder="Senha" minlength="6" maxlength="6" required>
+            </div>
+
+            <button type="submit" class="btn-submit">CADASTRAR</button>
+        </form>
+        <div class="footer-links">
+            <a href="#" onclick="alreadyhaveaccount()">Já tenho uma conta. Entrar.</a>
+            <div class="footer-brand">
+                Firewallet©<br>
+                Desenvolvido por V²
+            </div>
+        </div>
+    </div>
+
     <div id="main-content">
       <img src="assets/img/login-logo.png" draggable="false" style="user-select: none; margin-bottom: -100px;">
       <main>
@@ -13,7 +52,7 @@
         <form id="login-form" onsubmit="event.preventDefault(); enviarLogin();" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
           <input id="cpf" type="text" maxlength="14" placeholder="CPF" autofocus>
           <input id="password" type="password" maxlength="6" placeholder="Senha">
-          <a><p style="font-weight: 200; font-size: 12px; margin-right: 80px;">Recuperar meu acesso ></p></a>
+          <a><p style="font-weight: 200; font-size: 12px; margin-right: 80px;" onclick="createaccount()">Criar uma conta Firewallet ></p></a>
           <button id="login-button" type="submit">ENTRAR</button>
         </form>
       </main>
@@ -28,7 +67,7 @@
       <img src="assets/img/app-icon.png" draggable="false"  style="user-select: none; margin: 15px; position: absolute;left: 0px;" width="40px">
       <span id="balance-section">
         <p style="font-weight: 200; font-size: 12px;">Saldo atual</p>
-        <h2 id="balance-value">5.023</h2>
+        <h2 id="balance-value" style="margin-top: 25px;">5.023</h2>
         <span id="balance-type">
           <p id="corrente-type">Corrente</p>
           <p id="poupanca-type">Poupança</p>
@@ -100,5 +139,34 @@
       }
 
   };
+</script>
+<script>
+        // Máscara para CPF
+        document.getElementById('cpf-register').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, "");
+            value = value.replace(/(\d{3})(\d)/, "$1.$2");
+            value = value.replace(/(\d{3})(\d)/, "$1.$2");
+            value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            e.target.value = value;
+        });
+
+        // Máscara para Celular
+        document.getElementById('celular').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, "");
+            value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
+            value = value.replace(/(\d)(\d{4})$/, "$1-$2");
+            e.target.value = value;
+        });
+</script>
+<script>
+  function alreadyhaveaccount() {
+    document.getElementById('main-content').style.display = 'flex';
+    document.getElementById('register-panel').style.display = 'none';
+  }
+
+  function createaccount() {
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('register-panel').style.display = 'flex';
+  }
 </script>
 </html>
