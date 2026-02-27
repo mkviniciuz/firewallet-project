@@ -21,5 +21,5 @@ def cal_balance_py(total_in: float, total_out: float) -> float:
 def compound_interest(principal: float, rate: float, months: int) -> float:
     return lib.compound_interest(principal, rate, months)
 
-def percent_change_py(old: float, new: float) -> float
+def percent_change_py(old: float, new: float) -> float:
     return lib.percent_change(old, new)

@@ -173,6 +173,7 @@ main {
                 0px 16px 28.5px 0px rgba(0, 0, 0, 0.05);
     backdrop-filter: blur(12px);
     border-top: solid #fcfcfc1f 0.01px;
+    cursor: pointer;
     
 }
 
@@ -200,6 +201,19 @@ main {
     border-radius: 50px;
     z-index: -1;
     transform: translateX(0%);
+}
+
+.corrente-type.ativo::before{
+    position: absolute;
+    content: "";
+    left: 0px;
+    top: 0px;
+    background: #F6711E;
+    height: 100%;
+    width: 50%;
+    border-radius: 50px;
+    z-index: -1;
+    animation: switch 1s ease-in-out;
 }
 
 
@@ -315,6 +329,18 @@ input[type="date"]:focus, input[type="date"]:valid {
     100% {
         opacity: 1;
         transform: translateY(0px);
+    }
+    
+}
+
+@keyframes switch {
+
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(100%)
     }
     
 }
