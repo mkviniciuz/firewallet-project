@@ -1,6 +1,6 @@
 ## 🌐 📌 Demonstração (Funcional)
 
-![Demonstração do site](assets/demo.gif)
+![Demonstração do site](../assets/demo.gif)
 
 # 📌 Projeto Carteira Digital — Desktop App
 
